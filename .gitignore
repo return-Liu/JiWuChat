@@ -1,0 +1,10 @@
+# Backend project (not published in this repo)
+JiWu-chat-node/
+
+# Local editor / tooling configs
+.vscode/
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db

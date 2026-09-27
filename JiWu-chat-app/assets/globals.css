@@ -1,0 +1,1162 @@
+/* ============================================================
+   字体导入
+   ============================================================ */
+
+/* 阿里妈妈数黑体 @font-face 声明 */
+@font-face {
+  font-family: "AlimamaShuHeiTi";
+  src:
+    url("./font/alimama-shuheiti/AlimamaShuHeiTi-Bold.woff2") format("woff2"),
+    url("./font/alimama-shuheiti/AlimamaShuHeiTi-Bold.woff") format("woff");
+}
+
+/* 阿里妈妈东方大楷 @font-face 声明 */
+@font-face {
+  font-family: "Alimama Dongfang Dakai";
+  src:
+    url("./font/alimama-dongfang-dakai/AlimamaDongfangDakai-Regular.woff2") format("woff2"),
+    url("./font/alimama-dongfang-dakai/AlimamaDongfangDakai-Regular.woff") format("woff");
+}
+
+/* 阿里巴巴普惠体3.0 @font-face 声明 */
+@font-face {
+  font-family: "Alibaba PuHuiTi";
+  src:
+    url("./font/AlibabaPuHuiTi/AlibabaPuHuiTi-3-115-Black.woff2") format("woff2"),
+    url("./font/AlibabaPuHuiTi/AlibabaPuHuiTi-3-115-Black.woff") format("woff");
+}
+
+/* 钉钉进步字体 @font-face 声明 */
+@font-face {
+  font-family: "DingTalk JiJin";
+  src:
+    url("./font/DingTalk-JinBuTi/DingTalk-JinBuTi.woff2") format("woff2"),
+    url("./font/DingTalk-JinBuTi/DingTalk-JinBuTi.woff") format("woff");
+}
+
+/* 阿里妈妈刀隶体 @font-face 声明 */
+@font-face {
+  font-family: "Alimama DiaoLiTi";
+  src:
+    url("./font/AlimamaDaoLiTi/AlimamaDaoLiTi.woff2") format("woff2"),
+    url("./font/AlimamaDaoLiTi/AlimamaDaoLiTi.woff") format("woff");
+}
+
+/* 得意黑 @font-face 声明 */
+@font-face {
+  font-family: "SmileySans-Oblique";
+  src:
+    url("./font/SmileySans-Oblique/SmileySans-Oblique.woff2") format("woff2"),
+    url("./font/SmileySans-Oblique/SmileySans-Oblique.woff") format("woff");
+}
+
+/* 淘宝买菜体 @font-face 声明 */
+@font-face {
+  font-family: "TaobaoMaiCaiTi";
+  src:
+    url("./font/TaoBaoMaiCaiTi-Regular/TaoBaoMaiCaiTi-Regular.woff2") format("woff2"),
+    url("./font/TaoBaoMaiCaiTi-Regular/TaoBaoMaiCaiTi-Regular.woff") format("woff");
+}
+
+/* 阿里妈妈灵动体 @font-face 声明 */
+@font-face {
+  font-family: "AlimamaAgileVF-Thin";
+  src:
+    url("./font/AlimamaAgileVF-Thin/AlimamaAgileVF-Thin.woff2") format("woff2"),
+    url("./font/AlimamaAgileVF-Thin/AlimamaAgileVF-Thin.woff") format("woff");
+}
+
+/* 字玩哥特黑白无常 @font-face 声明 */
+@font-face {
+  font-family: "字玩哥特黑白无常 免费 超黑";
+}
+
+/* ============================================================
+   CSS 变量定义
+   ============================================================ */
+:root {
+  --font-size-base: 14px;
+  --font-family: "AlimamaShuHeiTi";
+  --scrollbar-width: 6px;
+  --scrollbar-height: 6px;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+  --scrollbar-thumb-color: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover-color: rgba(0, 0, 0, 0.35);
+  --scrollbar-track-radius: 3px;
+  --scrollbar-border-radius: 3px;
+
+  --glass-opacity: 0.7;
+  --glass-blur: 20px;
+  --shadow-intensity: 0.1;
+  --border-glow: transparent;
+  --texture-type: smooth;
+
+  /* View Transition 背景色变量 */
+  --vt-bg-color: #f5f6fa;
+
+  /* 颜色变量（由主题动态设置） */
+  --bg-primary: #f5f6fa;
+  --bg-secondary: #e8edf8;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+  --border-color: #dce2ef;
+  --card-bg: #ffffff;
+  --color-primary: #6366f1;
+  --color-primary-light: rgba(99, 102, 241, 0.1);
+  --color-primary-hover: #818cf8;
+  --color-primary-active: #4f46e5;
+  --color-border-light: rgba(99, 102, 241, 0.06);
+  --color-border-normal: #e0e7ff;
+  --error-color: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --success-color: #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.1);
+  --warning-color: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --purple-color: #8b5cf6;
+  --purple-bg: rgba(139, 92, 246, 0.1);
+}
+
+/* ============================================================
+   暗色模式 (html.dark)
+   与 theme.scss 保持同步，确保所有组件自动适配
+   ============================================================ */
+html.dark {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --text-primary: #e8e8e8;
+  --text-secondary: #9ca3af;
+  --border-color: #2a2a2a;
+  --card-bg: #1a1a1a;
+  --color-primary: #6b8fa8;
+  --color-primary-light: rgba(107, 143, 168, 0.12);
+  --color-primary-hover: #7ba0b8;
+  --color-primary-active: #5a7e98;
+  --color-border-light: rgba(255, 255, 255, 0.04);
+  --color-border-normal: rgba(255, 255, 255, 0.06);
+  --error-color: #f87171;
+  --error-bg: rgba(248, 113, 113, 0.15);
+  --success-color: #4ade80;
+  --success-bg: rgba(74, 222, 128, 0.15);
+  --warning-color: #fbbf24;
+  --warning-bg: rgba(251, 191, 36, 0.15);
+  --purple-color: #a78bfa;
+  --purple-bg: rgba(167, 139, 250, 0.15);
+  --vt-bg-color: #1a1a1a;
+
+  --scrollbar-track-color: rgba(255, 255, 255, 0.03);
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.12);
+  --scrollbar-thumb-hover-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ============================================================
+   基础样式
+   ============================================================ */
+html {
+  height: 100%;
+  height: 100dvh;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  overflow-x: hidden;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+html * {
+  font-family: var(--font-family);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-style: none;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   滚动条样式 - 默认始终显示
+   ============================================================ */
+
+/* ---------- WebKit 内核浏览器 (Chrome, Edge, Safari) ---------- */
+
+/* 滚动条容器 - 固定宽度 */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-height);
+  background: transparent;
+}
+
+/* 滚动条轨道 - 始终显示 */
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-track-radius);
+}
+
+/* 滚动条滑块 - 始终显示 */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+/* 滚动条角落 */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 滑块悬停效果 */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color);
+}
+
+/* ---------- Firefox 浏览器 ---------- */
+
+/* Firefox 滚动条始终显示 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+/* 
+   ============================================================
+   动画风格
+   ============================================================ */
+
+/* 流畅模式 - 禁用动画和过渡效果 */
+html.smooth-mode *,
+html.smooth-mode *::before,
+html.smooth-mode *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+html.smooth-mode {
+  scroll-behavior: auto !important;
+}
+
+/* 弹性动画风格 */
+html.animation-elastic * {
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+html.animation-elastic .modal-card,
+html.animation-elastic .detail-panel,
+html.animation-elastic .modern-drawer,
+html.animation-elastic .drawer-content,
+html.animation-elastic .dropdown-menu,
+html.animation-elastic .context-menu,
+html.animation-elastic .notification-card,
+html.animation-elastic .statusbar-notification,
+html.animation-elastic .tooltip,
+html.animation-elastic .popover,
+html.animation-elastic .el-dropdown-menu,
+html.animation-elastic .el-popper {
+  animation: elasticBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes elasticBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 渐隐渐现动画风格 */
+html.animation-fade * {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.animation-fade .modal-overlay,
+html.animation-fade .detail-overlay,
+html.animation-fade .notification-container,
+html.animation-fade .statusbar-notification-wrapper,
+html.animation-fade .fade-element {
+  animation: fadeInOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.animation-fade .modal-card,
+html.animation-fade .detail-panel,
+html.animation-fade .dropdown-menu,
+html.animation-fade .context-menu,
+html.animation-fade .tooltip,
+html.animation-fade .popover,
+html.animation-fade .el-dropdown-menu,
+html.animation-fade .el-popper,
+html.animation-fade .notification-card,
+html.animation-fade .statusbar-notification {
+  animation: fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 滑动动画风格 */
+html.animation-slide * {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+html.animation-slide .modal-card,
+html.animation-slide .detail-panel {
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+html.animation-slide .modern-drawer,
+html.animation-slide .drawer-content {
+  animation: slideRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+html.animation-slide .dropdown-menu,
+html.animation-slide .context-menu,
+html.animation-slide .el-dropdown-menu,
+html.animation-slide .el-popper,
+html.animation-slide .tooltip,
+html.animation-slide .popover {
+  animation: slideDown 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+html.animation-slide .notification-card {
+  animation: slideInLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+html.animation-slide .statusbar-notification {
+  animation: slideInTop 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 缩放动画风格 */
+html.animation-scale * {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.animation-scale .modal-card,
+html.animation-scale .detail-panel,
+html.animation-scale .dropdown-menu,
+html.animation-scale .context-menu,
+html.animation-scale .tooltip,
+html.animation-scale .popover,
+html.animation-scale .el-dropdown-menu,
+html.animation-scale .el-popper,
+html.animation-scale .notification-card,
+html.animation-scale .statusbar-notification {
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================
+   质感增强样式
+   ============================================================ */
+
+/* ---------- 毛玻璃效果 ---------- */
+.glass-morphism {
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  background: rgba(255, 255, 255, var(--glass-opacity, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, var(--shadow-intensity, 0.1)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 深色背景下的毛玻璃 */
+.glass-morphism-dark {
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  background: rgba(0, 0, 0, var(--glass-opacity, 0.5));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, var(--shadow-intensity, 0.3)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- 纹理效果 ---------- */
+.texture-paper {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.texture-smooth {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+}
+
+.texture-matte {
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.01) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+}
+
+.texture-canvas {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.005) 2px,
+    rgba(0, 0, 0, 0.005) 4px
+  );
+}
+
+.texture-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ---------- 边框发光效果 ---------- */
+.border-glow {
+  border-color: var(--border-glow, transparent);
+  box-shadow: 0 0 20px var(--border-glow, transparent);
+}
+
+.border-glow-strong {
+  border-color: var(--border-glow, transparent);
+  box-shadow:
+    0 0 40px var(--border-glow, transparent),
+    0 0 80px var(--border-glow, transparent);
+}
+
+/* ---------- 侧边栏增强 ---------- */
+.sidebar-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-enhanced::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sidebar-enhanced::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- 聊天区域增强 ---------- */
+.chat-area-enhanced {
+  position: relative;
+}
+
+.chat-area-enhanced::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chat-area-enhanced .chat-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 消息气泡增强 ---------- */
+.message-bubble-enhanced {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.message-bubble-enhanced::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.message-bubble-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* 自己的消息气泡 - 带主题色 */
+.message-bubble-self {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.message-bubble-self::before {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+}
+
+/* ---------- 按钮增强 ---------- */
+.btn-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  outline: none;
+}
+
+.btn-enhanced::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.btn-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-enhanced:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 主要按钮 */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.btn-primary:active {
+  background: var(--color-primary-active);
+  border-color: var(--color-primary-active);
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-border-light);
+}
+
+/* ---------- 输入框增强 ---------- */
+.input-enhanced {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.02),
+    0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: inherit;
+  color: var(--text-primary);
+  width: 100%;
+  outline: none;
+}
+
+.input-enhanced:focus {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px var(--color-primary-light),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.input-enhanced::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* ---------- 卡片增强 ---------- */
+.card-enhanced {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.card-enhanced:hover {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ---------- 分割线增强 ---------- */
+.divider-enhanced {
+  position: relative;
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-color) 20%,
+    var(--border-color) 80%,
+    transparent
+  );
+  margin: 16px 0;
+}
+
+.divider-enhanced-text {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-size: 0.85em;
+}
+
+.divider-enhanced-text::before,
+.divider-enhanced-text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-color));
+}
+
+.divider-enhanced-text::after {
+  background: linear-gradient(to left, transparent, var(--border-color));
+}
+
+/* ---------- 浮动阴影动画 ---------- */
+.shadow-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.shadow-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ---------- 渐变光晕动画 ---------- */
+.gradient-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ---------- 骨架屏加载动画 ---------- */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--color-border-light) 25%,
+    var(--bg-primary) 50%,
+    var(--color-border-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- 主题切换过渡动画 ---------- */
+.theme-transition {
+  transition:
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   暗色模式适配
+   ============================================================ */
+html.dark {
+  color-scheme: dark;
+  --scrollbar-track-color: rgba(255, 255, 255, 0.05);
+  --scrollbar-thumb-color: rgba(255, 255, 255, 0.15);
+  --scrollbar-thumb-hover-color: rgba(255, 255, 255, 0.25);
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+/* ============================================================
+   响应式适配
+   ============================================================ */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 13px;
+    --glass-blur: 12px;
+  }
+
+  .message-bubble-enhanced {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .card-enhanced {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .btn-enhanced {
+    padding: 6px 16px;
+    border-radius: 6px;
+  }
+
+  .input-enhanced {
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+}
+
+/* ============================================================
+   工具类
+   ============================================================ */
+
+/* 组合类 - 快速应用多个效果 */
+.glass-card {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.glass-button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: inherit;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.glass-bubble {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 毛玻璃 + 纹理组合 */
+.glass-paper {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.glass-smooth {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.glass-matte {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* 带发光边框的毛玻璃 */
+.glass-glow {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-color: var(--border-glow, transparent);
+  box-shadow: 0 0 20px var(--border-glow, transparent);
+}
+
+/* 悬浮效果工具 */
+.hover-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 点击涟漪效果 */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+.ripple:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ============================================================
+   View Transition 主题切换动画
+   - CSS @keyframes + CSS 变量驱动，JS 只设置 data 属性
+   - 两个独立 @keyframes，相同缓动，确保亮→暗和暗→亮完全对称
+   ============================================================ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
+/* 亮→暗：旧视图收缩消失 */
+html[data-theme-transition="to-dark"]::view-transition-old(root) {
+  z-index: 2147483646;
+  animation: theme-shrink 800ms ease-in-out both;
+}
+html[data-theme-transition="to-dark"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* 暗→亮：新视图扩散出现 */
+html[data-theme-transition="to-light"]::view-transition-old(root) {
+  z-index: 1;
+}
+html[data-theme-transition="to-light"]::view-transition-new(root) {
+  z-index: 2147483646;
+  animation: theme-expand 800ms ease-in-out both;
+}
+
+@keyframes theme-shrink {
+  from {
+    clip-path: circle(
+      var(--theme-transition-radius) at var(--theme-transition-x) var(--theme-transition-y)
+    );
+  }
+  to {
+    clip-path: circle(0% at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
+@keyframes theme-expand {
+  from {
+    clip-path: circle(0% at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(
+      var(--theme-transition-radius) at var(--theme-transition-x) var(--theme-transition-y)
+    );
+  }
+}
+
+/* 关闭主题动画时禁用 View Transition */
+html.theme-animation-disabled::view-transition-old(root),
+html.theme-animation-disabled::view-transition-new(root) {
+  animation: none !important;
+  clip-path: none !important;
+}
+
+/* ============================================================
+   精细化界面功能样式
+   ============================================================ */
+
+/* 禁用组件动画 */
+html.disable-component-animation *,
+html.disable-component-animation *::before,
+html.disable-component-animation *::after {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
+/* GPU 加速 */
+html.enable-gpu-acceleration .app-container,
+html.enable-gpu-acceleration .main-content,
+html.enable-gpu-acceleration .chat-area,
+html.enable-gpu-acceleration .message-list {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 消息滚动优化 */
+html.optimize-message-scroll .message-list {
+  scroll-behavior: auto;
+  overflow-anchor: auto;
+  contain: strict;
+}
+
+html.optimize-message-scroll .message-list > * {
+  contain: layout style;
+}
+
+/* 禁用消息列表动画 */
+html.disable-message-list-animation .message-item {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* 骨架屏 */
+html.enable-skeleton-screen .skeleton-placeholder {
+  background: linear-gradient(
+    90deg,
+    var(--color-border-light) 25%,
+    var(--bg-secondary) 50%,
+    var(--color-border-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}

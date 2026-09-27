@@ -1,0 +1,275 @@
+{
+  "name": "jiwu-chat",
+  "version": "2.1.4",
+  "description": "极物聊天即时通讯聊天软件-JiWu-Chat",
+  "main": "electron/main.js",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .vue,.ts,.js --fix",
+    "format": "prettier --write \"**/*.{vue,ts,js,json,css,scss}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "electron:dev": "cross-env NODE_ENV=development nodemon --watch electron --ext js,json --exec 'electron .'",
+    "electron:dev:full": "concurrently \"npm run dev\" \"npm run electron:dev\"",
+    "electron:build": "nuxt generate && electron-builder",
+    "electron:build:prod": "cross-env NODE_ENV=production npm run electron:build",
+    "electron:pack": "electron-builder --dir",
+    "electron:pack:prod": "cross-env NODE_ENV=production npm run electron:pack",
+    "clean": "rimraf dist .nuxt node_modules/.cache release"
+  },
+  "dependencies": {
+    "@ant-design/charts": "^2.6.7",
+    "@ant-design/graphs": "2.0.0",
+    "@ant-design/icons-vue": "^7.0.1",
+    "@pinia/nuxt": "^0.11.3",
+    "@vueuse/core": "^14.4.0",
+    "axios": "^1.13.2",
+    "colorthief": "^3.3.1",
+    "dayjs": "1.10.8",
+    "dompurify": "^3.4.12",
+    "gsap": "^3.15.0",
+    "highlight.js": "^11.11.1",
+    "js-cookie": "^3.0.5",
+    "markdown-it": "^14.1.1",
+    "nuxt": "^3.0.0",
+    "nuxt-charts": "^2.2.3",
+    "peerjs": "^1.5.5",
+    "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "simple-mind-map": "0.14.0-fix.3",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.8.3",
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.0.0",
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/i18n": "10.5.0",
+    "@types/js-cookie": "^3.0.6",
+    "@types/markdown-it": "^14.1.2",
+    "@types/simple-peer": "^9.11.9",
+    "@vitest/coverage-v8": "^3.0.0",
+    "ant-design-vue": "^4.0.0",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^42.3.3",
+    "electron-builder": "^24.13.3",
+    "electron-reload": "2.0.0-alpha.1",
+    "eslint": "^9.0.0",
+    "jsdom": "^24.0.0",
+    "nodemon": "^3.0.1",
+    "png-to-ico": "^3.0.2",
+    "prettier": "^3.3.0",
+    "rimraf": "^5.0.5",
+    "sass": "^1.97.3",
+    "sass-embedded": "^1.97.3",
+    "vitest": "^3.0.0",
+    "vue-tsc": "^3.3.7"
+  },
+  "build": {
+    "appId": "com.jiwu.chat",
+    "productName": "极物聊天",
+    "copyright": "Copyright © 2026 JiWu",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/**/*",
+      "!public/downloads/**",
+      "!electron/**/*.test.js",
+      "!electron/**/*.spec.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "build/icon",
+        "to": "icons",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "public",
+        "to": "public",
+        "filter": [
+          "**/*",
+          "!downloads/**"
+        ]
+      }
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/**/*.node"
+    ],
+    "compression": "maximum",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "artifactName": "JiwuChat_${version}_${arch}-setup.${ext}",
+      "icon": "build/icon/logo.ico",
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "signAndEditExecutable": false,
+      "publisherName": "JiWu",
+      "legalTrademarks": "极物聊天",
+      "rfc3161TimeStampServer": "http://timestamp.digicert.com"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "artifactName": "JiwuChat_${version}_${arch}.${ext}",
+      "icon": "build/icon/logo.icns",
+      "category": "public.app-category.social-networking",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "JiwuChat_${version}_${arch}.${ext}",
+      "icon": "build/icon/logo.png",
+      "category": "Network",
+      "desktop": {
+        "StartupWMClass": "极物聊天",
+        "MimeType": "x-scheme-handler/jiwuchat"
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "极物聊天",
+      "installerIcon": "build/icon/logo.ico",
+      "uninstallerIcon": "build/icon/logo.ico",
+      "installerHeaderIcon": "build/icon/logo.ico",
+      "deleteAppDataOnUninstall": false,
+      "perMachine": true,
+      "displayLanguageSelector": true,
+      "language": "2052",
+      "multiLanguageInstaller": true
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "icon": "build/icon/logo.icns",
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "format": "ULFO"
+    },
+    "appImage": {
+      "desktop": {
+        "StartupWMClass": "极物聊天"
+      }
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libdrm2",
+        "libgbm1",
+        "libxcb-dri3-0"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    },
+    "npmArgs": [
+      "--production",
+      "--no-audit",
+      "--no-fund"
+    ],
+    "nodeGypRebuild": false
+  },
+  "nodemonConfig": {
+    "watch": [
+      "electron"
+    ],
+    "ext": "js,json",
+    "ignore": [
+      "node_modules/**/*",
+      "dist/**/*",
+      ".nuxt/**/*",
+      "release/**/*",
+      "build/**/*"
+    ],
+    "delay": 1000,
+    "verbose": false,
+    "execMap": {
+      "js": "electron"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(pnpm remove dompurify)",
+      "PowerShell(pnpm --dir \"d:\\\\��������Nuxt3+Electron\\\\JiWu-chat-app\" exec vitest run tests/unit/htmlSecurity.test.ts tests/unit/markdownRenderer.test.ts)",
+      "PowerShell(pnpm --dir \"d:\\\\��������Nuxt3+Electron\\\\JiWu-chat-app\" exec nuxi typecheck)"
+    ]
+  }
+}

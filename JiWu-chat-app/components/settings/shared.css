@@ -1,0 +1,3 @@
+// 设置页面共享样式 - 用于所有 SettingsXxx 组件
+// 注意：这些样式需要放在父级 .settings-page 的 scoped 作用域内
+// 如果组件使用 scoped，需要在父组件中定义这些共享样式

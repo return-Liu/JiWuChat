@@ -1,0 +1,160 @@
+/* ========== 群等级徽章公共样式 ========== */
+/* 此文件提供统一的等级徽章样式,供多个组件复用 */
+
+/* 基础徽章样式 */
+.level-badge-combined {
+  position: relative;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  line-height: 1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* ========== 群主 · 淡红色 ========== */
+.badge-owner {
+  background-color: #fdeaea;
+  color: #e65555;
+  font-weight: 700;
+  border: none;
+  box-shadow: none;
+}
+
+.badge-owner:hover {
+  background-color: #fdeaea;
+}
+
+/* ========== 管理员 · 淡蓝色 ========== */
+.badge-admin {
+  background-color: #eaf5ff;
+  color: #5599ff;
+  font-weight: 700;
+  border: none;
+  box-shadow: none;
+}
+
+.badge-admin:hover {
+  background-color: #eaf5ff;
+}
+
+/* ========== 默认等级徽章颜色 ========== */
+.badge-default,
+.badge-first-meet {
+  background: linear-gradient(135deg, #f0f4ff, #e8eeff);
+  color: #5b6abf;
+  border: 1px solid rgba(91, 106, 191, 0.3);
+}
+.badge-lucky-meet {
+  background: linear-gradient(135deg, #f5f9ff, #eef5ff);
+  color: #4a7ced;
+  border: 1px solid rgba(74, 124, 237, 0.3);
+}
+.badge-slow-meet {
+  background: linear-gradient(135deg, #f0fbf7, #e1f7f1);
+  color: #26a69a;
+  border: 1px solid rgba(38, 166, 154, 0.3);
+}
+.badge-ordinary {
+  background: linear-gradient(135deg, #fffbf5, #fef4e7);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+.badge-keep-heart {
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  color: #d81b60;
+  border: 1px solid rgba(216, 27, 96, 0.3);
+}
+.badge-steady-go {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #43a047;
+  border: 1px solid rgba(67, 160, 71, 0.3);
+}
+.badge-sun-life {
+  background: linear-gradient(135deg, #fff8e1, #ffecb3);
+  color: #f57f17;
+  border: 1px solid rgba(245, 127, 23, 0.3);
+}
+.badge-warm-heart {
+  background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+  color: #0288d1;
+  border: 1px solid rgba(2, 136, 209, 0.3);
+}
+.badge-with-light {
+  background: linear-gradient(135deg, #ede7f6, #d1c4e9);
+  color: #7e57c2;
+  border: 1px solid rgba(126, 87, 192, 0.3);
+}
+.badge-quiet-deep {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  color: #8e24aa;
+  border: 1px solid rgba(142, 36, 170, 0.3);
+}
+.badge-sea-waves {
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+  color: #0097a7;
+  border: 1px solid rgba(0, 151, 167, 0.3);
+}
+
+/* ========== 自定义头衔等级颜色方案 ========== */
+.badge-custom-first-meet {
+  background: linear-gradient(135deg, #fff0f5, #ffe8f0);
+  color: #e91e63;
+  border: 1px solid rgba(233, 30, 99, 0.3);
+}
+.badge-custom-lucky-meet {
+  background: linear-gradient(135deg, #fff8f0, #ffe8d6);
+  color: #ff6d00;
+  border: 1px solid rgba(255, 109, 0, 0.3);
+}
+.badge-custom-slow-meet {
+  background: linear-gradient(135deg, #fffef0, #fff9d6);
+  color: #f9a825;
+  border: 1px solid rgba(249, 168, 37, 0.3);
+}
+.badge-custom-ordinary {
+  background: linear-gradient(135deg, #f0fff4, #d6ffe8);
+  color: #2e7d32;
+  border: 1px solid rgba(46, 125, 50, 0.3);
+}
+.badge-custom-keep-heart {
+  background: linear-gradient(135deg, #f0ffff, #d6f5f5);
+  color: #00838f;
+  border: 1px solid rgba(0, 131, 143, 0.3);
+}
+.badge-custom-steady-go {
+  background: linear-gradient(135deg, #f0f8ff, #d6ebff);
+  color: #0277bd;
+  border: 1px solid rgba(2, 119, 189, 0.3);
+}
+.badge-custom-sun-life {
+  background: linear-gradient(135deg, #f5f0ff, #e8d6ff);
+  color: #7b1fa2;
+  border: 1px solid rgba(123, 31, 162, 0.3);
+}
+.badge-custom-warm-heart {
+  background: linear-gradient(135deg, #fef0ff, #f8d6ff);
+  color: #9c27b0;
+  border: 1px solid rgba(156, 39, 170, 0.3);
+}
+.badge-custom-with-light {
+  background: linear-gradient(135deg, #fff0f8, #ffd6eb);
+  color: #c2185b;
+  border: 1px solid rgba(194, 24, 91, 0.3);
+}
+.badge-custom-quiet-deep {
+  background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+  color: #d32f2f;
+  border: 1px solid rgba(211, 47, 47, 0.3);
+}
+.badge-custom-sea-waves {
+  background: linear-gradient(135deg, #fff8f0, #ffe8d0);
+  color: #8d6e63;
+  border: 1px solid rgba(141, 110, 99, 0.3);
+}
