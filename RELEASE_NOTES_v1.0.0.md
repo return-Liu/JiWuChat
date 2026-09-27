@@ -95,10 +95,11 @@
 
 ## 下载
 
-| 平台           | 安装包                          |
-| -------------- | ------------------------------- |
-| Windows (x64)  | `JiwuChat_1.0.0_x64-setup.exe`  |
-| Windows (ia32) | `JiwuChat_1.0.0_ia32-setup.exe` |
+| 平台           | 安装包                          | 说明       |
+| -------------- | ------------------------------- | ---------- |
+| Windows        | `JiwuChat_1.0.0-setup.exe`      | 默认安装器 |
+| Windows (ia32) | `JiwuChat_1.0.0_ia32-setup.exe` | 32 位系统  |
+| Windows (x64)  | `JiwuChat_1.0.0_x64-setup.exe`  | 64 位系统  |
 
 ## 许可证
 
