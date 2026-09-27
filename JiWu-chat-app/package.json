@@ -1,6 +1,6 @@
 {
   "name": "jiwu-chat",
-  "version": "2.1.4",
+  "version": "1.0.0",
   "description": "极物聊天即时通讯聊天软件-JiWu-Chat",
   "main": "electron/main.js",
   "scripts": {
