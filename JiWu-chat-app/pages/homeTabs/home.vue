@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
 import {
   COLOR_SCHEMES,
   FEATURE_ICONS,
@@ -88,68 +88,60 @@ import {
   getFeatureIconStyle,
 } from "../../untils/homePageData";
 import type { DownloadPlatform } from "../../types/untilsTypes";
-import { useGithubReleaseAssets } from "../../composables/useGithubChangelog";
 
 const props = defineProps<{
   isDarkTheme: boolean;
 }>();
 
 /* --------------------------------------------------------------------------
- * 下载 / 平台切换
+ * 下载 / 平台切换（写死安装包，不依赖 GitHub API）
  * ------------------------------------------------------------------------ */
 const showPlatformList = ref<boolean>(false);
 
-// 从 GitHub Release 动态拉取实际已上传的安装包
-const { assets, loadAssets, inferPlatformLabel } = useGithubReleaseAssets();
-
-// 默认展示的安装包：Windows 安装器（无架构后缀）
-const DEFAULT_FILENAME = "JiwuChat_1.0.0-setup.exe";
-const DEFAULT_VERSION = "v1.0.0";
+const VERSION = "v1.0.0";
 const GITHUB_REPO_URL = "https://github.com/return-Liu/JiWuChat";
 
-/** 默认下载目标：优先从 GitHub assets 中找匹配的安装包，找不到则用固定链接 */
-const currentDownload = computed<DownloadPlatform>(() => {
-  const matched = assets.value.find((a) => a.name === DEFAULT_FILENAME);
-  if (matched) {
-    return {
-      key: "default",
-      label: "Windows",
-      filename: matched.name,
-      tooltip: matched.downloadUrl,
-      downloadUrl: matched.downloadUrl,
-      arch: "x64",
-    };
-  }
-  // 回退：使用固定 Release 下载链接
-  return {
-    key: "default",
-    label: "Windows",
-    filename: DEFAULT_FILENAME,
-    tooltip: `${GITHUB_REPO_URL}/releases/download/${DEFAULT_VERSION}/${DEFAULT_FILENAME}`,
-    downloadUrl: `${GITHUB_REPO_URL}/releases/download/${DEFAULT_VERSION}/${DEFAULT_FILENAME}`,
-    arch: "x64",
-  };
-});
+/** 根据文件名生成 GitHub Release 下载链接 */
+function buildDownloadUrl(filename: string): string {
+  return `${GITHUB_REPO_URL}/releases/download/${VERSION}/${filename}`;
+}
 
-/** 下拉框中展示的其他安装包（排除默认的 x64 安装器） */
-const otherPlatforms = computed<DownloadPlatform[]>(() =>
-  assets.value
-    .filter((a) => a.name !== DEFAULT_FILENAME)
-    .map((a) => ({
-      key: a.name,
-      label: inferPlatformLabel(a.name),
-      filename: a.name,
-      tooltip: a.downloadUrl,
-      downloadUrl: a.downloadUrl,
-    })),
-);
+/** 默认下载目标：Windows 安装器（无架构后缀） */
+const currentDownload: DownloadPlatform = {
+  key: "default",
+  label: "Windows",
+  filename: "JiwuChat_1.0.0-setup.exe",
+  tooltip: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
+  downloadUrl: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
+  arch: "x64",
+};
+
+/** 下拉框中展示的其他安装包（写死） */
+const otherPlatforms: DownloadPlatform[] = [
+  {
+    key: "ia32",
+    label: "Windows",
+    filename: "JiwuChat_1.0.0_ia32-setup.exe",
+    tooltip: buildDownloadUrl("JiwuChat_1.0.0_ia32-setup.exe"),
+    downloadUrl: buildDownloadUrl("JiwuChat_1.0.0_ia32-setup.exe"),
+    arch: "ia32",
+  },
+  {
+    key: "x64",
+    label: "Windows",
+    filename: "JiwuChat_1.0.0_x64-setup.exe",
+    tooltip: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
+    downloadUrl: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
+    arch: "x64",
+  },
+];
 
 function togglePlatformList(): void {
   showPlatformList.value = !showPlatformList.value;
 }
 
 function handleDownload(): void {
-  const url = currentDownload.value.downloadUrl;
+  const url = currentDownload.downloadUrl;
   if (url && url !== "#") window.open(url, "_blank");
 }
 
@@ -163,10 +155,6 @@ function openWebLogin(): void {
   if (typeof window === "undefined") return;
   window.open("/login", "_blank");
 }
-
-onMounted(() => {
-  loadAssets();
-});
 </script>
 
 <style scoped>
