@@ -10,7 +10,7 @@ const VERSION = pkg.version;
 
 // ===== GitHub 仓库配置 =====
 const GITHUB_OWNER = "return-Liu";
-const GITHUB_REPO = "----Nuxt3-Electron";
+const GITHUB_REPO = "JiWu_Chat";
 // Release tag 前缀（v2.1.4）
 const RELEASE_TAG = `v${VERSION}`;
 
