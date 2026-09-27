@@ -1,8 +1,13 @@
 # 极物聊天 JiWu Chat
 
-> 基于 Nuxt 3 + Electron 的即时通讯桌面聊天软件
+> 基于 Nuxt 3 + Electron 的即时通讯聊天软件，同时支持 **Web 端** 与 **桌面端**
 
-极物聊天（JiWu Chat）是一款现代化的即时通讯桌面应用，采用 Nuxt 3 构建前端界面，通过 Electron 打包为跨平台桌面客户端，支持中英文双语国际化。
+极物聊天（JiWu Chat）是一款现代化的即时通讯应用，采用 Nuxt 3 构建前端界面，一套代码同时支持两种运行形态：
+
+- 🌐 **Web 端**：基于 Nuxt 3 的响应式 Web 应用，可通过浏览器直接访问
+- 🖥️ **桌面端**：通过 Electron 打包为跨平台（Windows / macOS / Linux）桌面客户端
+
+应用支持中英文双语国际化，提供完整的即时通讯能力。
 
 ## ✨ 功能特性
 
@@ -19,17 +24,32 @@
 
 ## 🛠 技术栈
 
-| 类别 | 技术 |
-|------|------|
-| 前端框架 | [Nuxt 3](https://nuxt.com/) / Vue 3 |
-| 桌面端 | [Electron](https://www.electronjs.org/) |
+| 类别     | 技术                                              |
+| -------- | ------------------------------------------------- |
+| 前端框架 | [Nuxt 3](https://nuxt.com/) / Vue 3               |
+| 桌面端   | [Electron](https://www.electronjs.org/)           |
 | 状态管理 | [Pinia](https://pinia.vuejs.org/)（含持久化插件） |
-| UI 组件 | [Ant Design Vue](https://antdv.com/) |
-| 国际化 | [@nuxtjs/i18n](https://i18n.nuxtjs.org/) |
-| 实时通信 | Socket.IO Client、PeerJS、Simple-Peer |
-| 样式 | SCSS |
-| 测试 | [Vitest](https://vitest.dev/) |
-| 构建 | electron-builder |
+| UI 组件  | [Ant Design Vue](https://antdv.com/)              |
+| 国际化   | [@nuxtjs/i18n](https://i18n.nuxtjs.org/)          |
+| 实时通信 | Socket.IO Client、PeerJS、Simple-Peer             |
+| 样式     | SCSS                                              |
+| 测试     | [Vitest](https://vitest.dev/)                     |
+| 构建     | electron-builder                                  |
+
+## 🖥️ 双端支持说明
+
+本项目采用「一套代码、双端运行」的架构：
+
+| 端       | 运行方式                              | 构建产物                            | 说明                                             |
+| -------- | ------------------------------------- | ----------------------------------- | ------------------------------------------------ |
+| Web 端   | 浏览器访问（Nuxt 3 SSR / SSG）        | `.output/` 静态站点或 Node 服务     | 首页预渲染为静态 HTML，其余页面为 SPA            |
+| 桌面端  | Electron 客户端（`file://` 协议加载） | Windows `.exe` / macOS `.dmg` / Linux `.AppImage` 等 | 通过 `baseURL: "./"` 使用相对路径加载资源 |
+
+**关键设计**：
+
+- 使用相对路径（`base: "./"`），确保桌面端通过 `file://` 协议加载时资源能正确解析
+- `routeRules` 按路由粒度控制渲染模式：首页预渲染（SSG），登录页与业务页保持 SPA
+- Electron 主进程通过 `windowManager` 管理主窗口与多个辅助窗口（设置、通话、聊天记录等独立窗口）
 
 ## 📁 目录结构
 
@@ -81,33 +101,57 @@ pnpm install
 
 ### 启动开发环境
 
-Web 端开发模式：
+**Web 端开发模式**（浏览器访问）：
 
 ```bash
 pnpm dev
 ```
 
-Electron 桌面端开发模式（同时启动 Nuxt 与 Electron）：
+**Electron 桌面端开发模式**（同时启动 Nuxt 与 Electron）：
 
 ```bash
 pnpm electron:dev:full
 ```
 
+> 说明：`electron:dev:full` 使用 `concurrently` 并行启动 Nuxt dev server 与 Electron 主进程。前端代码由 Nuxt 负责 HMR 热更新，主进程代码（`electron/*.js`）由 `nodemon` 监听并自动重启。
+
 ## 📦 构建与打包
 
+### Web 端构建
+
 ```bash
-# 构建 Nuxt 应用
+# 构建 Nuxt 应用（Nitro 静态预设）
 pnpm build
 
-# 生成静态站点
+# 生成静态站点（预渲染首页）
 pnpm generate
 
-# 打包 Electron 桌面应用
+# 本地预览构建产物
+pnpm preview
+```
+
+### 桌面端打包
+
+```bash
+# 打包 Electron 桌面应用（生成安装包）
 pnpm electron:build
 
-# 生产环境打包
+# 生产环境打包（设置 NODE_ENV=production）
 pnpm electron:build:prod
+
+# 仅生成未打包的目录（用于调试，不生成安装包）
+pnpm electron:pack
 ```
+
+### 支持的目标平台
+
+| 平台   | 产物格式                    | 架构            |
+| ------ | --------------------------- | --------------- |
+| Windows | NSIS 安装包（`.exe`）      | x64、ia32       |
+| macOS  | DMG（`.dmg`）、ZIP（`.zip`） | x64、arm64      |
+| Linux  | AppImage、deb、rpm          | x64、arm64      |
+
+安装包统一输出到 `release/` 目录，命名格式如 `JiwuChat_${version}_${arch}-setup.exe`。
 
 ## 🧪 测试
 
