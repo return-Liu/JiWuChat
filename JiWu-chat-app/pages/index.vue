@@ -560,7 +560,7 @@ const handleToggleTheme = (event: MouseEvent) => {
 };
 
 function openGitHub() {
-  window.open("https://github.com/your-repo", "_blank");
+  window.open("https://github.com/return-Liu/----Nuxt3-Electron", "_blank");
 }
 
 // 跳转到更新日志页面（GitHub commits 展示）

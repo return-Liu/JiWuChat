@@ -11,9 +11,9 @@ import { ref } from "vue";
  *   fix(login): 修复登录时 token 过期未跳转的问题
  */
 
-// ===== 仓库配置（占位符，上线前替换为真实 owner/repo）=====
-const GITHUB_OWNER = "KiWi233333";
-const GITHUB_REPO = "JiwuChat";
+// ===== 仓库配置 =====
+const GITHUB_OWNER = "return-Liu";
+const GITHUB_REPO = "----Nuxt3-Electron";
 // 可选：私有仓库需要 token（通过环境变量注入，勿硬编码）
 const GITHUB_TOKEN = "";
 
