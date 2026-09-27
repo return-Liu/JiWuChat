@@ -377,7 +377,6 @@ function openWebLogin(): void {
   padding: 4px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   min-width: 120px;
-  max-width: 200px;
   z-index: 100;
 }
 
@@ -409,9 +408,9 @@ function openWebLogin(): void {
 
 .platform-item-label {
   flex: 1;
-  word-break: break-all;
-  white-space: normal;
-  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .platform-item-icon {

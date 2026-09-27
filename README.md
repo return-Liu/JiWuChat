@@ -57,6 +57,16 @@
 └── .gitignore
 ```
 
+## 下载安装
+
+最新版本 **v1.0.0** 安装包已发布到 [GitHub Release](https://github.com/return-Liu/JiWuChat/releases/tag/v1.0.0)：
+
+| 平台           | 安装包                          | 说明       |
+| -------------- | ------------------------------- | ---------- |
+| Windows        | `JiwuChat_1.0.0-setup.exe`      | 默认安装器 |
+| Windows (ia32) | `JiwuChat_1.0.0_ia32-setup.exe` | 32 位系统  |
+| Windows (x64)  | `JiwuChat_1.0.0_x64-setup.exe`  | 64 位系统  |
+
 ## 快速开始
 
 前端项目位于 `JiWu-chat-app/` 目录，详细的安装、开发、构建与打包说明请参阅 [JiWu-chat-app/README.md](JiWu-chat-app/README.md)。

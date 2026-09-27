@@ -157,13 +157,17 @@ pnpm electron:pack
 
 ### 支持的目标平台
 
-| 平台    | 产物格式                     | 架构       |
-| ------- | ---------------------------- | ---------- |
-| Windows | NSIS 安装包（`.exe`）        | x64、ia32  |
-| macOS   | DMG（`.dmg`）、ZIP（`.zip`） | x64、arm64 |
-| Linux   | AppImage、deb、rpm           | x64、arm64 |
+当前已发布 **v1.0.0** 版本，Windows 安装包（NSIS）：
 
-安装包统一输出到 `release/` 目录，命名格式如 `JiwuChat_${version}_${arch}-setup.exe`。
+| 平台    | 安装包                          | 架构          |
+| ------- | ------------------------------- | ------------- |
+| Windows | `JiwuChat_1.0.0-setup.exe`      | 默认安装器    |
+| Windows | `JiwuChat_1.0.0_ia32-setup.exe` | ia32（32 位） |
+| Windows | `JiwuChat_1.0.0_x64-setup.exe`  | x64（64 位）  |
+
+安装包统一输出到 `release/` 目录，命名格式如 `JiwuChat_${version}_${arch}-setup.exe`（无架构后缀的为默认安装器）。
+
+> macOS 与 Linux 安装包暂未发布，后续版本会陆续支持。
 
 ## 测试
 
