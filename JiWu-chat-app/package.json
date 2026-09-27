@@ -188,8 +188,8 @@
       }
     },
     "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "极物聊天",
@@ -197,7 +197,7 @@
       "uninstallerIcon": "build/icon/logo.ico",
       "installerHeaderIcon": "build/icon/logo.ico",
       "deleteAppDataOnUninstall": false,
-      "perMachine": true,
+      "perMachine": false,
       "displayLanguageSelector": true,
       "language": "2052",
       "multiLanguageInstaller": true

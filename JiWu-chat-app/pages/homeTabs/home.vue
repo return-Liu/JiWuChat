@@ -106,18 +106,26 @@ function buildDownloadUrl(filename: string): string {
   return `${GITHUB_REPO_URL}/releases/download/${VERSION}/${filename}`;
 }
 
-/** 默认下载目标：Windows 安装器（无架构后缀） */
+/** 默认下载目标：Windows 64 位安装器（体积更小，下载更快） */
 const currentDownload: DownloadPlatform = {
   key: "default",
   label: "Windows",
-  filename: "JiwuChat_1.0.0-setup.exe",
-  tooltip: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
-  downloadUrl: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
+  filename: "JiwuChat_1.0.0_x64-setup.exe",
+  tooltip: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
+  downloadUrl: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
   arch: "x64",
 };
 
 /** 下拉框中展示的其他安装包（写死） */
 const otherPlatforms: DownloadPlatform[] = [
+  {
+    key: "default",
+    label: "Windows",
+    filename: "JiwuChat_1.0.0-setup.exe",
+    tooltip: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
+    downloadUrl: buildDownloadUrl("JiwuChat_1.0.0-setup.exe"),
+    arch: "x64",
+  },
   {
     key: "ia32",
     label: "Windows",
@@ -125,14 +133,6 @@ const otherPlatforms: DownloadPlatform[] = [
     tooltip: buildDownloadUrl("JiwuChat_1.0.0_ia32-setup.exe"),
     downloadUrl: buildDownloadUrl("JiwuChat_1.0.0_ia32-setup.exe"),
     arch: "ia32",
-  },
-  {
-    key: "x64",
-    label: "Windows",
-    filename: "JiwuChat_1.0.0_x64-setup.exe",
-    tooltip: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
-    downloadUrl: buildDownloadUrl("JiwuChat_1.0.0_x64-setup.exe"),
-    arch: "x64",
   },
 ];
 
