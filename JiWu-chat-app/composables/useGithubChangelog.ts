@@ -13,7 +13,7 @@ import { ref } from "vue";
 
 // ===== 仓库配置 =====
 const GITHUB_OWNER = "return-Liu";
-const GITHUB_REPO = "JiWu_Chat";
+const GITHUB_REPO = "JiWuChat";
 // 可选：私有仓库需要 token（通过环境变量注入，勿硬编码）
 const GITHUB_TOKEN = "";
 
@@ -182,6 +182,16 @@ export function useGithubChangelog() {
 
 // ==================== GitHub Release 数据源 ====================
 
+/** GitHub Release 附件（安装包等） */
+export interface GithubReleaseAsset {
+    id: number;
+    name: string;
+    size: number;
+    downloadUrl: string;
+    contentType: string;
+    createdAt: string;
+}
+
 /** GitHub Release 结构 */
 export interface GithubRelease {
     id: number;
@@ -194,6 +204,7 @@ export interface GithubRelease {
     html_url: string;
     author: string;
     authorAvatar: string;
+    assets: GithubReleaseAsset[];
 }
 
 /** 从 Release 正文中提取的标题（用于右侧目录导航） */
@@ -236,6 +247,14 @@ async function fetchReleases(
         html_url: r.html_url || "",
         author: r.author?.login || "",
         authorAvatar: r.author?.avatar_url || "",
+        assets: (r.assets || []).map((a: any) => ({
+            id: a.id,
+            name: a.name || "",
+            size: a.size || 0,
+            downloadUrl: a.browser_download_url || "",
+            contentType: a.content_type || "",
+            createdAt: a.created_at || "",
+        })),
     }));
 }
 
@@ -318,6 +337,57 @@ export function useGithubReleases() {
         headings,
         loadReleases,
         selectRelease,
+        GITHUB_OWNER,
+        GITHUB_REPO,
+    };
+}
+
+// ==================== GitHub Release 附件（下载安装包） ====================
+
+/** 从文件名推断平台标签（用于下载下拉框展示） */
+function inferPlatformLabel(filename: string): string {
+    const lower = filename.toLowerCase();
+    if (lower.endsWith(".exe")) return "Windows";
+    if (lower.endsWith(".dmg") || lower.endsWith(".zip")) return "macOS";
+    if (
+        lower.endsWith(".appimage") ||
+        lower.endsWith(".deb") ||
+        lower.endsWith(".rpm")
+    ) {
+        return "Linux";
+    }
+    return "安装包";
+}
+
+/** 组合式函数：拉取最新 Release 的附件（安装包），用于首页下载 */
+export function useGithubReleaseAssets() {
+    const assets = ref<GithubReleaseAsset[]>([]);
+    const loading = ref(false);
+    const error = ref<string | null>(null);
+
+    /** 加载最新 Release 的附件 */
+    const loadAssets = async () => {
+        loading.value = true;
+        error.value = null;
+
+        try {
+            const list = await fetchReleases(GITHUB_OWNER, GITHUB_REPO, { per_page: 5 });
+            // 取第一个非草稿的 Release 的附件
+            const latest = list.find((r) => !r.draft);
+            assets.value = latest?.assets || [];
+        } catch (err) {
+            error.value = err instanceof Error ? err.message : "加载下载列表失败";
+        } finally {
+            loading.value = false;
+        }
+    };
+
+    return {
+        assets,
+        loading,
+        error,
+        loadAssets,
+        inferPlatformLabel,
         GITHUB_OWNER,
         GITHUB_REPO,
     };
