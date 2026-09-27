@@ -110,7 +110,7 @@ function setAppIcon(window) {
     }
 
     if (process.platform === "win32") {
-      app.setAppUserModelId("com.yourcompany.yourapp");
+      app.setAppUserModelId("com.jiwu.chat");
     } else if (process.platform === "darwin") {
       app.dock.setIcon(icon);
     }

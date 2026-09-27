@@ -13,7 +13,7 @@ import { ref } from "vue";
 
 // ===== 仓库配置 =====
 const GITHUB_OWNER = "return-Liu";
-const GITHUB_REPO = "JiWuChat";
+const GITHUB_REPO = "JiWuChat-Electron";
 // 可选：私有仓库需要 token（通过环境变量注入，勿硬编码）
 const GITHUB_TOKEN = "";
 

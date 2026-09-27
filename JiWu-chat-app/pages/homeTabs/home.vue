@@ -99,7 +99,7 @@ const props = defineProps<{
 const showPlatformList = ref<boolean>(false);
 
 const VERSION = "v1.0.0";
-const GITHUB_REPO_URL = "https://github.com/return-Liu/JiWuChat";
+const GITHUB_REPO_URL = "https://github.com/return-Liu/JiWuChat-Electron";
 
 /** 根据文件名生成 GitHub Release 下载链接 */
 function buildDownloadUrl(filename: string): string {

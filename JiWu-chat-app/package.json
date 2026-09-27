@@ -1,6 +1,6 @@
 {
   "name": "jiwu-chat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "极物聊天即时通讯聊天软件-JiWu-Chat",
   "main": "electron/main.js",
   "scripts": {
@@ -188,8 +188,8 @@
       }
     },
     "nsis": {
-      "oneClick": true,
-      "allowToChangeInstallationDirectory": false,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "极物聊天",
@@ -197,7 +197,8 @@
       "uninstallerIcon": "build/icon/logo.ico",
       "installerHeaderIcon": "build/icon/logo.ico",
       "deleteAppDataOnUninstall": false,
-      "perMachine": false,
+      "perMachine": true,
+      "allowElevation": true,
       "displayLanguageSelector": true,
       "language": "2052",
       "multiLanguageInstaller": true
@@ -245,6 +246,8 @@
     },
     "publish": {
       "provider": "github",
+      "owner": "return-Liu",
+      "repo": "JiWuChat-Electron",
       "releaseType": "release"
     },
     "npmArgs": [
