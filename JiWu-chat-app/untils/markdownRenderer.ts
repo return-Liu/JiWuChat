@@ -25,7 +25,7 @@ const ALLOWED_TAGS = [
   "ul",
 ];
 
-const ALLOWED_ATTR = ["class", "href", "rel", "target", "title"];
+const ALLOWED_ATTR = ["class", "href", "rel", "target", "title", "id"];
 
 const md = new MarkdownIt({
   html: false,
@@ -53,6 +53,49 @@ md.renderer.rules.link_open = (tokens, index, options, env, self) => {
   return defaultLinkOpen
     ? defaultLinkOpen(tokens, index, options, env, self)
     : self.renderToken(tokens, index, options);
+};
+
+// 为标题添加 id，用于目录导航锚点定位
+const seenHeadings = new Map<string, number>();
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\u4e00-\u9fa5]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function headingRule(
+  tag: string,
+  level: number,
+): (tokens: any[], index: number, options: any, env: any, self: any) => string {
+  return (tokens, index, options, env, self) => {
+    const token = tokens[index];
+    // 提取标题纯文本
+    let text = "";
+    for (let i = index + 1; i < tokens.length; i++) {
+      if (tokens[i].type === `${tag}_close`) break;
+      if (tokens[i].type === "inline") {
+        text += tokens[i].content;
+      }
+    }
+    text = text.replace(/[*_`~]/g, "").trim();
+
+    let slug = slugify(text);
+    const count = seenHeadings.get(slug) || 0;
+    seenHeadings.set(slug, count + 1);
+    if (count > 0) {
+      slug = `${slug}-${count}`;
+    }
+
+    token.attrSet("id", slug);
+    return self.renderToken(tokens, index, options);
+  };
+}
+
+md.renderer.rules.heading_open = (tokens, index, options, env, self) => {
+  const tag = tokens[index].tag;
+  const level = Number(tag.slice(1));
+  return headingRule(tag, level)(tokens, index, options, env, self);
 };
 
 const sanitize = (html: string): string => {

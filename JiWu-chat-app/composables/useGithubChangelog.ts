@@ -179,3 +179,146 @@ export function useGithubChangelog() {
         GITHUB_REPO,
     };
 }
+
+// ==================== GitHub Release 数据源 ====================
+
+/** GitHub Release 结构 */
+export interface GithubRelease {
+    id: number;
+    tag_name: string;
+    name: string;
+    body: string;
+    draft: boolean;
+    prerelease: boolean;
+    published_at: string;
+    html_url: string;
+    author: string;
+    authorAvatar: string;
+}
+
+/** 从 Release 正文中提取的标题（用于右侧目录导航） */
+export interface ReleaseHeading {
+    level: number;
+    text: string;
+    anchor: string;
+}
+
+/** 拉取 GitHub Releases */
+async function fetchReleases(
+    owner: string,
+    repo: string,
+    options: { per_page?: number } = {},
+): Promise<GithubRelease[]> {
+    const { per_page = 100 } = options;
+    const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/releases?per_page=${per_page}`;
+
+    const headers: Record<string, string> = {
+        Accept: "application/vnd.github+json",
+    };
+    if (GITHUB_TOKEN) {
+        headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+    }
+
+    const res = await fetch(url, { headers });
+    if (!res.ok) {
+        throw new Error(`GitHub Release API 请求失败: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return (data || []).map((r: any) => ({
+        id: r.id,
+        tag_name: r.tag_name || "",
+        name: r.name || r.tag_name || "",
+        body: r.body || "",
+        draft: !!r.draft,
+        prerelease: !!r.prerelease,
+        published_at: r.published_at || r.created_at || "",
+        html_url: r.html_url || "",
+        author: r.author?.login || "",
+        authorAvatar: r.author?.avatar_url || "",
+    }));
+}
+
+/** 从 Markdown 正文中提取标题（h1~h4），用于目录导航 */
+function extractHeadings(markdown: string): ReleaseHeading[] {
+    if (!markdown) return [];
+    const headings: ReleaseHeading[] = [];
+    const lines = markdown.split("\n");
+    const seen = new Map<string, number>();
+
+    for (const line of lines) {
+        const match = line.match(/^(#{1,4})\s+(.+)$/);
+        if (!match) continue;
+        const level = match[1].length;
+        const text = match[2].trim().replace(/[*_`~]/g, "");
+        if (!text) continue;
+
+        // 生成唯一 anchor
+        let anchor = text
+            .toLowerCase()
+            .replace(/[^\w\u4e00-\u9fa5]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        const count = seen.get(anchor) || 0;
+        seen.set(anchor, count + 1);
+        if (count > 0) {
+            anchor = `${anchor}-${count}`;
+        }
+
+        headings.push({ level, text, anchor });
+    }
+    return headings;
+}
+
+/** 组合式函数：拉取 GitHub Release 并支持目录导航 */
+export function useGithubReleases() {
+    const releases = ref<GithubRelease[]>([]);
+    const loading = ref(false);
+    const error = ref<string | null>(null);
+    const selectedTag = ref("");
+    const headings = ref<ReleaseHeading[]>([]);
+
+    /** 加载 Releases */
+    const loadReleases = async () => {
+        loading.value = true;
+        error.value = null;
+
+        try {
+            const list = await fetchReleases(GITHUB_OWNER, GITHUB_REPO);
+            releases.value = list.filter((r) => !r.draft);
+
+            // 默认选中最新版本
+            if (releases.value.length > 0 && !selectedTag.value) {
+                selectedTag.value = releases.value[0].tag_name;
+            }
+            updateHeadings();
+        } catch (err) {
+            error.value = err instanceof Error ? err.message : "加载更新日志失败";
+        } finally {
+            loading.value = false;
+        }
+    };
+
+    /** 根据选中版本更新目录 */
+    const updateHeadings = () => {
+        const current = releases.value.find((r) => r.tag_name === selectedTag.value);
+        headings.value = current ? extractHeadings(current.body) : [];
+    };
+
+    /** 选择版本 */
+    const selectRelease = (tag: string) => {
+        selectedTag.value = tag;
+        updateHeadings();
+    };
+
+    return {
+        releases,
+        loading,
+        error,
+        selectedTag,
+        headings,
+        loadReleases,
+        selectRelease,
+        GITHUB_OWNER,
+        GITHUB_REPO,
+    };
+}
